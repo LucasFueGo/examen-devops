@@ -29,6 +29,3 @@ describe("validate gamer tag", () => {
         expect(isValidGamerTag("abcdefgh#i")).toBe(false);
     });
 });
-
-
-
