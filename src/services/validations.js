@@ -4,6 +4,7 @@ function isValidGamerTag(gamerTag) {
 }
 
 
+
 const isEmpty = (label) => !label || label.length === 0;
 
 module.exports = { isValidGamerTag, isEmpty};
