@@ -1,7 +1,6 @@
 // TODO: Add here the function to validate
 function isValidGamerTag(gamerTag) {
-    if(gamerTag.length>=8) return true;
-
+    if(gamerTag.length>=8 && /[!@#\$%\^\&*\)\(+=._-]/.test(gamerTag)) return true;
     return false;
 }
 
