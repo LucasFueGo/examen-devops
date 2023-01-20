@@ -1,0 +1,53 @@
+  name: examen devops
+
+  on :
+  pull_request:
+    branches: [ main ]
+  Workflow_dispatch: 
+
+  jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3.2.0
+      - uses: actions/setup-node@v v3.5.2
+        with:
+          node-version: 16.14
+          cache: "npm"
+      - run: npm ci
+
+  Code_quality:
+    runs-on: ubuntu-latest
+    needs: [install] 
+    steps:
+      - uses: actions/checkout@v3.2.0
+      - uses: actions/setup-node@v v3.5.2
+        with:
+          node-version: 16.14
+          cache: "npm"
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run prettier
+
+  test:
+    runs-on: ubuntu-latest
+    needs: [install]
+    steps:
+      - uses: actions/checkout@v3.2.0
+      - uses: actions/setup-node@v v3.5.2
+        with:
+          node-version: 16.14
+          cache: "npm"
+      - run: npm ci
+      - run: npm test
+
+  build:
+    runs-on: ubuntu-latest
+    needs: [code_quality, test]
+    steps:
+      - uses: actions/checkout@v3.2.0
+      - uses: actions/setup-node@v3.5.2
+        with:
+          node-version: 16.14
+      - run: npm ci
+      - run: npm run build
