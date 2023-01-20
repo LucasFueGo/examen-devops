@@ -13,10 +13,13 @@ try {
     });
 
     checkButton.addEventListener("click", () => {
-        // TODO: Add the logic to display the correct feedback message (error and validation)
-        feedbackMessageText = isEmpty(gamerTagValue)
-            ? "Gamer tag cannot be empty"
-            : "Gamer tag is valid";
+        if (isEmpty(gamerTagValue)) {
+            feedbackMessageText = "Gamer tag cannot be empty";
+        } else if (!isValidGamerTag(gamerTagValue)) {
+            feedbackMessageText = "Invalid gamer tag";
+        } else {
+            feedbackMessageText = "Gamer tag is valid";
+        }
         feedbackMessage.textContent = feedbackMessageText;
     });
 } catch (err) {
